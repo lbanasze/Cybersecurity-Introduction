@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dog Den</title>
+    <link rel="stylesheet" href="/static/custom.css?foo={{ range(1, 100000) | random }}" type="text/css">
+</head>
+<body>
+
+    <h1>Dog Den</h1>
+    <h2>The Forum For All Things Dog</h2>
+
+    <form action="{{ url_for('login') }}" method="POST">
+	    <div>
+            <h3>Existing User</h3>
+            <label for="userE">Username:</label><br>
+            <input type="text" id="userE" name="userE"><br>
+            <label for="passE">Password:</label><br>
+            <input type="text" id="passE" name="passE"><br><br>
+            <input type="submit" id="SubmitE" name="Submit" value="Sign In">
+
+        </div>
+
+        <div>
+    	    <h3>New User</h3>
+            <label for="userN">Username:</label><br>
+            <input type="text" id="userN" name="userN"><br>
+            <p class="requirements"> Passwords must be between 8 and 25 characters, contain at least one uppercase,
+            one lowercase, one number, and one special character.</p>
+            <label for="passN">Password:</label><br>
+            <input type="text" id="passN" name="passN"><br><br>
+            <button type="button" onclick="randomizePassword()">Randomize Password</button>
+            <input type="submit" id="SubmitN" name="Submit" value="Create User">
+            <p id="randomPassword" style="display:none;">{{ pw }}</p>
+
+        </div>
+            <p>{{ err }}</p>
+
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        function randomizePassword() {
+            document.getElementById("passN").value = document.getElementById("randomPassword").innerHTML;
+
+            var copyText = document.getElementById("passN");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            alert("Password copied to clipboard.").innerHTML;
+        }
+    </script>
+
+</body>
+</html>
